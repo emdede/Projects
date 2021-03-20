@@ -1,0 +1,29 @@
+<div id="posts">
+    {% for post in page_obj %}
+    <div class="container post-div">
+        <a href="{% url 'profile' post.author.id %}"><strong>{{ post.author }}</strong></a>
+        {% if post.author == user %}
+        <button class="btn btn-info edit-button" id="editbutton-{{ post.id }}" data-postid="{{ post.id }}">Edit post</button>
+        {% endif %}
+        <p id="content-{{ post.id }}">{{ post.content}}</p>
+        <textarea class="editfield" id="editfield-{{ post.id }}" cols="50" rows="5">{{ post.content }}</textarea>
+        <small>{{ post.timestamp }}</small><br>
+        <strong>Likes: <span id="likes-{{ post.id }}">{{ post.likes.all|length }}</span></strong>
+        {% if user.is_authenticated %}
+        {% if user in post.likes.all %}
+        <button class="btn btn-primary btn-sm like-button" id="like-{{ post.id }}" data-postid="{{ post.id }}" onclick="unlike({{ post.id }})">Unlike</button>
+        {% else %}
+        <button class="btn btn-primary btn-sm like-button" id="like-{{ post.id }}" data-postid="{{ post.id }}" onclick="like( {{ post.id }} )">Like</button>
+        {% endif %}
+        {% endif %} 
+    </div>
+    {% endfor %}
+</div>
+<div class="container" id="pagination-buttons">
+    {% if page_obj.has_previous %}
+        <a class="btn-lg btn-primary" href="?page={{ page_obj.previous_page_number }}" role="button" style="float: left; margin: 10px;">Previous</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <a class="btn-lg btn-primary" href="?page={{ page_obj.next_page_number }}" role="button" style="float: right; margin: 10px;">Next</a>
+    {% endif %}
+</div>

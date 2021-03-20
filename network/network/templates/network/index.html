@@ -1,0 +1,21 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+{% if user.is_authenticated %}
+    <div class='container' id="new-post-div">
+        <h4 style="margin: 10px;">New Post</h4>
+        <form action="new" method="POST" id="new-post-form">
+            <textarea class="form-control" id="new-post-body" name="content" placeholder="What is on your mind?"></textarea>
+            <input type="submit" class="btn btn-primary" value="Share" style="margin: 10px;">
+        </form>
+    </div>
+{% endif %}
+{% include 'network/posts.html' %}
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

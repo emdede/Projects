@@ -1,0 +1,46 @@
+body {
+    background-color: floralwhite;
+}
+
+#new-post-div {
+    margin-top: 6px;
+    border: 1px solid gray;
+}
+
+.post-div {
+    border: 1px solid gray;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.post-div:hover {
+    color: white;
+    background-color: DarkSlateGray;
+}
+
+#follow {
+    display: none;
+}
+
+#unfollow {
+    display: none;
+}
+
+.editfield {
+    display: none;
+}
+
+.like-button {
+    margin: 6px;
+}
+
+.edit-button {
+    margin: 6px;
+    float: right;
+    font-size: 20px;
+}
+
+a:hover {
+    color: OrangeRed;
+    text-decoration: none;
+}

@@ -1,0 +1,30 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <h2 style="text-align: center;">{{ profile.username }}</h2>
+    <div style="text-align: center;">
+        Followers: <span id="follower-count">{{ followers}}</span> Following: {{ following }}
+    </div>
+    {% if profile.id != user.id and user.is_authenticated %}
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-success" id="follow">Follow</button>
+        <button type="button" class="btn btn-outline-danger" id="unfollow">Unfollow</button>
+    </div>
+    {% endif %}
+    {% for post in posts %}
+    {{ post.content }}
+    <br>
+    {% endfor %}
+
+{% include 'network/posts.html' %}
+{% endblock %}
+
+    
+{% block script %}
+    {{ profile.id|json_script:"profile-id" }}
+    {{ user_following|json_script:"currently-following" }}
+    <script src="{% static 'network/profile.js' %}"></script>
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
